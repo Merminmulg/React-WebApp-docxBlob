@@ -8,7 +8,7 @@ namespace React_WebApp_docxBlob
     public class FileService
     {
         private readonly string _storageAccount = "blobstoragefortesttasks";
-        private readonly string _key = Environment.GetEnvironmentVariable("BlobKey");
+        private readonly string _key = "YwPQ6+ljWQWeIKPSy3ZyXad7P1CkIWYj7M9r9ECclw+VbFG6Bc3U2OpVsLWrRd228kiK/CBvDboB+AStvFsmdQ==";
         private readonly BlobContainerClient _filesContainer;
 
         public FileService()

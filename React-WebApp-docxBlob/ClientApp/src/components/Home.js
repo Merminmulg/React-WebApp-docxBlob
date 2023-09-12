@@ -15,7 +15,7 @@ export class Home extends Component {
     }
 
     handleSubmit = async (event) => { 
-        this.setState.loading(true)
+        this.setState({ loading: true })
         event.preventDefault();
 
         // Получение данных из формы
@@ -29,16 +29,16 @@ export class Home extends Component {
             });
             console.log(response)
             if (response.ok) {
-                this.setState.loading(false)
+                this.setState({ loading: false})
                 this.setState({ result: response.status, error: null });
                 console.log('File uploaded');
             } else {
-                this.setState.loading(false)
+                this.setState({ loading: false })
                 this.setState({ error: 'Произошла ошибка при загрузке файла.', result: null });
                 console.error('Uploading error');
             }
         } catch (error) {
-            this.setState.loading(false)
+            this.setState({ loading: false })
             this.setState({ error: 'Произошла сетевая ошибка.', result: null });
             console.error('Network error:', error);
         }
