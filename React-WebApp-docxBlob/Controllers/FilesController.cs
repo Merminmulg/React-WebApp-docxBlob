@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Net.Http;
 
 namespace React_WebApp_docxBlob.Controllers
 {
@@ -8,40 +9,42 @@ namespace React_WebApp_docxBlob.Controllers
     public class FilesController : ControllerBase
     {
         private readonly FileService _fileService;
+        private readonly ILogger<FilesController> _logger;
 
-        public FilesController(FileService fileService)
+        public FilesController(FileService fileService, ILogger<FilesController> logger)
         {
-            try
-            {
-                _fileService = fileService;
-                Console.WriteLine("good");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
+            _fileService = fileService;
+            _logger = logger;
         }
 
         [HttpPost]  
         [Route("uploadfile")]
         public async Task<IActionResult> UploadFileAsync([FromForm] IFormFile file, string email)
         {
-            if (file == null || file.Length == 0)
+            try
             {
-                return BadRequest("File not selected or empty");
+                if (file == null || file.Length == 0)
+                {
+                    return BadRequest("File not selected or empty");
 
-            }
-            string fileName = Path.GetFileName(file.FileName);
-            string fileExtension = Path.GetExtension(fileName).ToLower();
+                }
+                string fileName = Path.GetFileName(file.FileName);
+                string fileExtension = Path.GetExtension(fileName).ToLower();
 
-            if (fileExtension == ".docx")
-            {
-                var result = await _fileService.UploadAsync(file, email);
-                return Ok(result);
+                if (fileExtension == ".docx")
+                {
+                    var result = await _fileService.UploadAsync(file, email);
+                    return Ok(result);
+                }
+                else
+                {
+                    return BadRequest("Invalid file format");
+                }
             }
-            else
+            catch(HttpRequestException ex)
             {
-                return BadRequest("Invalid file format");
+                _logger.LogError($"HTTP {ex.StatusCode} Error: {ex.Message}");
+                return new StatusCodeResult((int)ex.StatusCode);
             }
         }
 
