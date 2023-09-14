@@ -42,7 +42,6 @@ namespace React_WebApp_tests
             Assert.NotNull(response.Blob);
             Assert.True(response.Blob.Uri.StartsWith($"https://{storageAccount}.blob.core.windows.net/{containerName}/"));
             Assert.Equal("example.docx", response.Blob.Name);
-            // Дополнительные проверки, если необходимо
         }
         [Fact]
         public async Task UploadAsync_InvalidFile_ReturnsSuccessResponse()
