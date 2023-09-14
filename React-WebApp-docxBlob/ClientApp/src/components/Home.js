@@ -18,7 +18,15 @@ export class Home extends Component {
         this.setState({ loading: true })
         event.preventDefault();
 
-        // Получение данных из формы
+        const email = event.target.email.value;
+
+        const emailPattern = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/;
+        if (!emailPattern.test(email)) {
+            this.setState({ loading: false, error: 'Invalid email format', result: null });
+            console.error('Invalid email format');
+            return;
+        }
+
         const formData = new FormData();
         formData.append('file', event.target.file.files[0]);
 
@@ -34,13 +42,13 @@ export class Home extends Component {
                 console.log('File uploaded');
             } else {
                 this.setState({ loading: false })
-                this.setState({ error: 'Произошла ошибка при загрузке файла.', result: null });
+                this.setState({ error: 'Problem with uploading file', result: null });
                 console.error('Uploading error');
             }
-        } catch (error) {
+        } catch (ex) {
             this.setState({ loading: false })
-            this.setState({ error: 'Произошла сетевая ошибка.', result: null });
-            console.error('Network error:', error);
+            this.setState({ error: 'Network error', result: null });
+            console.error('Network error:', ex);
         }
     }
 
