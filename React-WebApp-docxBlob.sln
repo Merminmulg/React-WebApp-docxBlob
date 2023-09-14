@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34003.232
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "React-WebApp-docxBlob", "React-WebApp-docxBlob\React-WebApp-docxBlob.csproj", "{3BE48A39-18AB-4AFB-AA46-EC6D30D77670}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "React-WebApp-docxBlob", "React-WebApp-docxBlob\React-WebApp-docxBlob.csproj", "{3BE48A39-18AB-4AFB-AA46-EC6D30D77670}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "React-WebApp-tests", "React-WebApp-tests\React-WebApp-tests.csproj", "{31A6AD37-C86C-4FFA-990E-563B468F90B8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{3BE48A39-18AB-4AFB-AA46-EC6D30D77670}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3BE48A39-18AB-4AFB-AA46-EC6D30D77670}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3BE48A39-18AB-4AFB-AA46-EC6D30D77670}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31A6AD37-C86C-4FFA-990E-563B468F90B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31A6AD37-C86C-4FFA-990E-563B468F90B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31A6AD37-C86C-4FFA-990E-563B468F90B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31A6AD37-C86C-4FFA-990E-563B468F90B8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

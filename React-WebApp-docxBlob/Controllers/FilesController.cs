@@ -8,10 +8,10 @@ namespace React_WebApp_docxBlob.Controllers
     [ApiController]
     public class FilesController : ControllerBase
     {
-        private readonly FileService _fileService;
+        private readonly IFileService _fileService;
         private readonly ILogger<FilesController> _logger;
 
-        public FilesController(FileService fileService, ILogger<FilesController> logger)
+        public FilesController(IFileService fileService, ILogger<FilesController> logger)
         {
             _fileService = fileService;
             _logger = logger;
@@ -23,9 +23,9 @@ namespace React_WebApp_docxBlob.Controllers
         {
             try
             {
-                if (file == null || file.Length == 0)
+                if (file == null)
                 {
-                    return BadRequest("File not selected or empty");
+                    return BadRequest("File not selected");
 
                 }
                 string fileName = Path.GetFileName(file.FileName);

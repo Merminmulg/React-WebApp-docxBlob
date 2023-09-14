@@ -5,10 +5,10 @@ using Azure.Storage.Sas;
 
 namespace React_WebApp_docxBlob
 {
-    public class FileService
+    public class FileService:IFileService
     {
         private readonly string _storageAccount = "blobstoragefortesttasks";
-        private readonly string _key = "YwPQ6+ljWQWeIKPSy3ZyXad7P1CkIWYj7M9r9ECclw+VbFG6Bc3U2OpVsLWrRd228kiK/CBvDboB+AStvFsmdQ==";
+        private readonly string _key = Environment.GetEnvironmentVariable("BlobKey");
         private readonly BlobContainerClient _filesContainer;
 
         public FileService()
@@ -22,6 +22,17 @@ namespace React_WebApp_docxBlob
         public async Task<BlobResponseDto> UploadAsync(IFormFile blob, string email)
         {
             BlobResponseDto response = new();
+
+            string fileName = Path.GetFileName(blob.FileName);
+            string fileExtension = Path.GetExtension(fileName).ToLower();
+
+            if (fileExtension != ".docx")
+            {
+                response.Error = true;
+                response.Status = "Invalid file format";
+                return response;
+            }
+
             BlobClient client = _filesContainer.GetBlobClient(blob.FileName);
 
             BlobSasBuilder sasBuilder = new BlobSasBuilder()
